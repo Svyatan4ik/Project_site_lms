@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="page-title">Последние рецепты</h1>
+    
+    {% if not recipes %}
+        <div class="empty-state">
+            <i class="fas fa-utensils"></i>
+            <p>Пока нет ни одного рецепта. Будьте первым!</p>
+            <a href="{{ url_for('create_recipe') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Создать рецепт
+            </a>
+        </div>
+    {% else %}
+        <div class="recipe-grid">
+            {% for recipe in recipes %}
+            <a href="{{ url_for('view_recipe', recipe_id=recipe.id) }}" class="recipe-card">
+                <div class="recipe-image">
+                    {% if recipe.image %}
+                        <img src="{{ url_for('static', filename=recipe.image) }}" alt="{{ recipe.title }}">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='images/placeholder.jpg') }}" alt="Нет изображения">
+                    {% endif %}
+                </div>
+                <div class="recipe-content">
+                    <h3 class="recipe-title">{{ recipe.title }}</h3>
+                    <p class="recipe-author">
+                        <i class="fas fa-user"></i> {{ recipe.author.username }}
+                    </p>
+                    <div class="recipe-meta">
+                        <span class="meta-item">
+                            <i class="fas fa-clock"></i> 30 мин
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-heart"></i> 15
+                        </span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

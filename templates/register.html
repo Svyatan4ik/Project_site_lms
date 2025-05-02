@@ -1,0 +1,21 @@
+<!-- templates/register.html -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Регистрация</h1>
+    <form method="POST">
+        <label>Email:</label>
+        <input type="email" name="email" required><br>
+        
+        <label>Пароль:</label>
+        <input type="password" name="password" required><br>
+        
+        <label>Подтвердите пароль:</label>
+        <input type="password" name="confirm_password" required><br>
+        
+        <label>Имя пользователя:</label>
+        <input type="text" name="username" required><br>
+        
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+{% endblock %}

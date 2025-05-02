@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Мои рецепты</h1>
+    
+    {% if not recipes %}
+        <p>У вас пока нет рецептов. <a href="{{ url_for('create_recipe') }}">Создать первый рецепт</a></p>
+    {% else %}
+        <div class="recipe-list">
+            {% for recipe in recipes %}
+            <div class="recipe-card">
+                {% if recipe.image %}
+                <img src="{{ url_for('static', filename=recipe.image) }}" alt="{{ recipe.title }}">
+                {% endif %}
+                
+                <div class="recipe-content">
+                    <h2>{{ recipe.title }}</h2>
+                    <div class="recipe-actions">
+                        <a href="{{ url_for('edit_recipe', recipe_id=recipe.id) }}" class="btn btn-edit">Редактировать</a>
+                        <form action="{{ url_for('delete_recipe', recipe_id=recipe.id) }}" method="POST" class="delete-form">
+                            <button type="submit" class="btn btn-delete">Удалить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

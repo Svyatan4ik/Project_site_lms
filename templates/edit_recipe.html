@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Редактировать рецепт</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="title">Название блюда:</label>
+            <input type="text" id="title" name="title" value="{{ recipe.title }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="image">Фото блюда:</label>
+            {% if recipe.image %}
+            <div class="current-image">
+                <img src="{{ url_for('static', filename=recipe.image) }}" alt="Current image" style="max-width: 200px;">
+                <p>Текущее изображение</p>
+            </div>
+            {% endif %}
+            <input type="file" id="image" name="image" accept="image/*">
+        </div>
+        
+        <div class="form-group">
+            <label for="ingredients">Ингредиенты:</label>
+            <textarea id="ingredients" name="ingredients" required>{{ recipe.ingredients }}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="instructions">Инструкция приготовления:</label>
+            <textarea id="instructions" name="instructions" required>{{ recipe.instructions }}</textarea>
+        </div>
+        
+        <button type="submit" class="btn">Сохранить изменения</button>
+        <a href="{{ url_for('my_recipes') }}" class="btn btn-cancel">Отмена</a>
+    </form>
+</div>
+{% endblock %}

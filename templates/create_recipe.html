@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Создать новый рецепт</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="title">Название блюда:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="image">Фото блюда:</label>
+            <input type="file" id="image" name="image" accept="image/*">
+        </div>
+        
+        <div class="form-group">
+            <label for="ingredients">Ингредиенты:</label>
+            <textarea id="ingredients" name="ingredients" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="instructions">Инструкция приготовления:</label>
+            <textarea id="instructions" name="instructions" required></textarea>
+        </div>
+        
+        <button type="submit" class="btn">Опубликовать рецепт</button>
+    </form>
+</div>
+{% endblock %}
